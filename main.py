@@ -3,8 +3,8 @@ import os
 import PIL
 from PIL import Image, ImageSequence
 from time import sleep
-
-
+from colorama import Fore
+import time
 binary_base = [1, 2, 4, 8, 16, 32, 64, 128]
 
 morse_code_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
@@ -237,124 +237,150 @@ def run():
 
     while True:
 
-        command = str(input('''
+        command = str(input(f'''{Fore.RED}
+                     ____           _      __  __           _            
+                    / ___| ___   __| | ___|  \/  | __ _ ___| |_ ___ _ ___
+                    | |   / _ \ / _` |/ _ \ |\/| |/ _` / __| __/ _ \  __|
+                    | |__| (_) | (_| |  __/ |  | | (_| \__ \ ||  __/ |   
+                    \____\___/ \__,_|\___|_|  |_|\__,_|___/\__\___||_|   
+                            
+                                                                {Fore.CYAN}By{Fore.RESET} {Fore.YELLOW}Ggahramaq{Fore.RESET}
 
-            Привет, это мой Python-мастерский декодер и энкодер! Пожалуйста выберите ниже (1/2)
+            {Fore.GREEN}CodeMaster{Fore.RESET} - многофункциональный инструмент. Пожалуйста выберите что-нибудь ниже (1/3)
+            
+            [{Fore.MAGENTA}1{Fore.RESET}] - {Fore.YELLOW}Encoder{Fore.RESET}
+            [{Fore.MAGENTA}2{Fore.RESET}] - {Fore.YELLOW}Decoder{Fore.RESET}
+            [{Fore.MAGENTA}3{Fore.RESET}] - {Fore.YELLOW}Генератор в ASСII{Fore.RESET}
 
-            1 - энкодер
-            2 - декодер
-            3 - генератор в ASKII
-        '''))
+            [{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Выбор: {Fore.RESET} '''))
 
         if command == '1':
-            choice = str(input('''
+            choice = str(input(f'''
 
-            Выберите тип кода:
+            [{Fore.MAGENTA}>{Fore.RESET}] Выберите тип кода (1/5):
            
-            1 - Двоичный код
-            2 - base64
-            3 - rot(rotate)
-            4 - азбука морзе
-            5 - юникод
+            [{Fore.MAGENTA}1{Fore.RESET}] - {Fore.YELLOW}Двоичный код{Fore.RESET}
+            [{Fore.MAGENTA}2{Fore.RESET}] - {Fore.YELLOW}Base64{Fore.RESET}
+            [{Fore.MAGENTA}3{Fore.RESET}] - {Fore.YELLOW}Rot(rotate){Fore.RESET}
+            [{Fore.MAGENTA}4{Fore.RESET}] - {Fore.YELLOW}Азбука морзе{Fore.RESET}
+            [{Fore.MAGENTA}5{Fore.RESET}] - {Fore.YELLOW}Unicode{Fore.RESET}
 
-           '''))
+            [{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Выбор: {Fore.RESET}'''))
             
             if choice == '1':
-                message = str(input('Напишите текст: '))
+                message = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}'))
                 if not is_english(message):
-                    print("Только на английском!")
+                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
+                    time.sleep(2)
                 else:
                     cypher_message = cypher(message)
-                    print(cypher_message)
+                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {cypher_message}")
+                    time.sleep(2)
 
             elif choice == '2':
-                encode_text = input("Напишите текст: ")
+                encode_text = input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}')
                 if not is_english(encode_hash):
-                    print("Только на английском!")
+                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
+                    time.sleep(2)
+                    
                 else:
                     encode_hash = base64.b64encode(encode_text.encode('UTF-8')).decode('ascii')
 
-                    print(encode_hash)
+                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {encode_hash}")
+                    time.sleep(2)
 
             elif choice == '3':
 
-                input_text = input("Напишите текст: ")
+                input_text = input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}')
                 if not is_english(input_text):
-                    print("Только на английском!")
+                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
+                    time.sleep(2)
                 else:
                     for shift in range(1, 26):
                         encrypted_text = rotate(input_text, shift)
-                        print(f"ROT{shift}: {encrypted_text}")
+                        print(f"{Fore.YELLOW}ROT{shift}:{Fore.RESET} {encrypted_text}")
+                        time.sleep(2)
 
 
             elif choice == '4':
-                morse_input = str(input("Введите текст:"))
+                morse_input = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}'))
                 if not is_english(morse_input):
-                    print("Только на английском!")
+                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
+                    time.sleep(2)
                 else:
                     morse_result = text_to_morse(morse_input)
-                    print(f"Текст в морском коде: {morse_result}")
+                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {morse_result}")
+                    time.sleep(2)
 
 
             elif choice == '5':
-                input_text = str(input("Введите текст:"))
+                input_text = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}'))
                 if not is_english(input_text):
-                    print("Только на английском!")
+                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
+                    time.sleep(2)
                 else:
                     unicode_result = text_to_unicode_escape(input_text)
-                    print(unicode_result)
+                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {unicode_result}")
+                    time.sleep(2)
 
 
             else:
-                print('Команда не найденна!')
+                print(f'[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Команда не найденна!{Fore.RESET}')
+                time.sleep(2)
 
         elif command == '2':
-            choice = str(input('''
+            choice = str(input(f'''
 
-            Выберите тип кода:
+            [{Fore.MAGENTA}>{Fore.RESET}] Выберите тип кода (1/5):
            
-            1 - Двоичный код
-            2 - base64
-            3 - rot(rotate)
-            4 - азбука морзе
-            5 - юникод
+            [{Fore.MAGENTA}1{Fore.RESET}] - {Fore.YELLOW}Двоичный код{Fore.RESET}
+            [{Fore.MAGENTA}2{Fore.RESET}] - {Fore.YELLOW}Base64{Fore.RESET}
+            [{Fore.MAGENTA}3{Fore.RESET}] - {Fore.YELLOW}Rot(rotate){Fore.RESET}
+            [{Fore.MAGENTA}4{Fore.RESET}] - {Fore.YELLOW}Азбука морзе{Fore.RESET}
+            [{Fore.MAGENTA}5{Fore.RESET}] - {Fore.YELLOW}Unicode{Fore.RESET}
 
-
-'''))
+            [{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Выбор: {Fore.RESET}'''))
             if choice == '1':
-                message = str(input('Введите двоичный код: '))
+                message = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите Двоичный код: {Fore.RESET}'))
                 decipher_message = decipher(message)
-                print(decipher_message)
+                print(f'[{Fore.YELLOW}RESULT{Fore.RESET}] - {decipher_message}')
+                time.sleep(2)
 
             elif choice == '2':
-                decode_text = input("Введите код base64:")
+                decode_text = input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите код base64: {Fore.RESET}')
                 decode_hash = base64.b64decode(decode_text)
                 decodeit = decode_hash.decode('UTF-8')
 
 
-                print(decodeit)
+                print(f'[{Fore.YELLOW}RESULT{Fore.RESET}] - {decodeit}')
+                time.sleep(2)
 
             elif choice == '3':
-                rot_number = int(input("Введите номер ROT (1-25): "))
+                rot_number = int(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите номер ROT (1-25): {Fore.RESET}'))
                 if 1 <= rot_number <= 25:
                     rot_text = input(f"Введите ROT код: {rot_number}: ")
                     decoded_text = decode_rot(rot_text, rot_number)
-                    print(f"Вот тебе декодированный ROT текст{rot_number}:", decoded_text)
+                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - ", decoded_text)
+                    time.sleep(2)
                 else:
-                    print("Номер ROT должен быть от 1 до 25.")
+                    print(f"[{Fore.YELLOW}!{Fore.RESET}] Номер ROT должен быть от 1 до 25.")
+                    time.sleep(2)
 
             elif choice == '4':
-                input_text = str(input("Напишите текст: "))
+                input_text = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст из азбуки морзе: {Fore.RESET}'))
                 decoded_text = morse_to_text(input_text)
-                print("Расшифрованный текст:", decoded_text)
+                print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - ", decoded_text)
+                time.sleep(2)
 
             elif choice == '5':
-                unicode_input = str(input('Введите unicode текст:'))
+                unicode_input = str(input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите unicode текст: {Fore.RESET}'))
                 decoded_text = unicode_escape_to_text(unicode_input)
-                print(decoded_text)
+                print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - ", decoded_text)
+                time.sleep(2)
 
             else:
-                print('Команда не найденна!')
+                print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Команда не найденна!{Fore.RESET}")
+                time.sleep(2)
             
         elif command == '3':
             image = Image.open("filename")
@@ -388,7 +414,8 @@ def run():
                 sleep(50)
    
         else:
-            print('Команда не найденна!')
+            print(f'[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Команда не найденна!{Fore.RESET}')
+            time.sleep(2)
 
 
 run()
