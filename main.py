@@ -279,15 +279,10 @@ def run():
 
             elif choice == '2':
                 encode_text = input(f'[{Fore.MAGENTA}>{Fore.RESET}] {Fore.GREEN}Введите текст: {Fore.RESET}')
-                if not is_english(encode_hash):
-                    print(f"[{Fore.MAGENTA}!{Fore.RESET}] {Fore.YELLOW}Только на английском!{Fore.RESET}")
-                    time.sleep(2)
-                    
-                else:
-                    encode_hash = base64.b64encode(encode_text.encode('UTF-8')).decode('ascii')
+                encode_hash = base64.b64encode(encode_text.encode('UTF-8')).decode('ascii')
 
-                    print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {encode_hash}")
-                    time.sleep(2)
+                print(f"[{Fore.YELLOW}RESULT{Fore.RESET}] - {encode_hash}")
+                time.sleep(2)
 
             elif choice == '3':
 
@@ -383,7 +378,7 @@ def run():
                 time.sleep(2)
             
         elif command == '3':
-            image = Image.open("filename")
+            image = Image.open("2.png")
             w = image.width
             h = image.height
             wnew = 632
@@ -407,7 +402,9 @@ def run():
                     print()
 
                 if isinstance(image, PIL.GifImagePlugin.GifImageFile):
+                    sleep(0.05)
                     os.system("cls")
+
                 print()
 
 
